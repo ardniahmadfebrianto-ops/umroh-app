@@ -1,30 +1,28 @@
 <?php
 
+use App\Http\Controllers\Admin\PackageController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Models\Package;
-use App\Livewire\Admin\ManagePackages;
 
-// 1. Halaman Utama
-Route::get('/', function () {
-    return view('welcome');
+// Arahkan pengunjung langsung ke halaman login.
+Route::redirect('/', '/login');
+
+Route::get('/dashboard', DashboardController::class)
+    ->middleware('auth')
+    ->name('dashboard');
+
+// Kelola paket hanya tersedia untuk pengelola sistem.
+Route::middleware(['auth', 'can:manage-packages'])->group(function () {
+    Route::get('/admin/packages', [PackageController::class, 'index'])->name('admin.packages');
+    Route::post('/admin/packages', [PackageController::class, 'store'])->name('admin.packages.store');
 });
 
-// 2. Dashboard (Menampilkan Paket untuk User)
-Route::get('/dashboard', function () {
-    return view('dashboard', [
-        'packages' => Package::all()
-    ]);
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-// 3. Rute Khusus Admin (Untuk Input Paket)
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/admin/packages', ManagePackages::class)->name('admin.packages');
-});
-
-// 4. Rute Profile
 Route::middleware('auth')->group(function () {
-    Route::view('profile', 'profile')->name('profile');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// WAJIB ADA: Memanggil file auth.php bawaan Breeze
 require __DIR__.'/auth.php';
