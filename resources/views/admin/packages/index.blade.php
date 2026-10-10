@@ -1,13 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
         <div>
-            <p class="text-xs font-bold uppercase tracking-[.18em] text-emerald-700">AREA PENGELOLA</p>
-            <h1 class="mt-1 text-2xl font-bold text-slate-900">Kelola paket umroh</h1>
+            <span>AREA PENGELOLA</span>
+            <h1>Kelola Paket Umroh</h1>
+            <p>Kelola informasi dan jadwal keberangkatan jamaah.</p>
         </div>
     </x-slot>
 
-    <div class="mx-auto grid max-w-7xl gap-6 px-4 py-8 sm:px-6 lg:grid-cols-[minmax(0,1fr)_1.2fr] lg:px-8">
-        <section class="h-fit rounded-2xl bg-white p-6 shadow-sm sm:p-8">
+    <div class="admin-packages-page mx-auto grid max-w-7xl gap-6 px-4 py-8 sm:px-6 lg:grid-cols-[minmax(0,1fr)_1.2fr] lg:px-8">
+        <section class="admin-panel h-fit rounded-2xl bg-white p-6 shadow-sm sm:p-8">
             <h2 class="text-lg font-bold text-slate-900">Tambah paket baru</h2>
             <p class="mt-1 text-sm text-slate-500">Lengkapi informasi perjalanan untuk ditampilkan kepada jamaah.</p>
 
@@ -48,7 +49,7 @@
             </form>
         </section>
 
-        <section class="overflow-hidden rounded-2xl bg-white shadow-sm">
+        <section class="admin-panel overflow-hidden rounded-2xl bg-white shadow-sm">
             <div class="border-b border-slate-100 px-6 py-5">
                 <h2 class="font-bold text-slate-900">Daftar paket</h2>
                 <p class="mt-1 text-sm text-slate-500">{{ $packages->count() }} paket tersedia</p>

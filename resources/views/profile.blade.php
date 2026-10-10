@@ -1,12 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
-        </h2>
+        <div class="page-heading">
+            <span>PENGATURAN AKUN</span>
+            <h1>Profil Saya</h1>
+            <p>Kelola informasi pribadi dan keamanan akun Anda.</p>
+        </div>
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+        <div class="profile-page max-w-7xl mx-auto sm:px-6 lg:px-8">
             @if (session('status'))
                 <div class="rounded-xl bg-emerald-50 p-4 text-sm font-medium text-emerald-800">
                     {{ [
@@ -16,7 +18,7 @@
                 </div>
             @endif
 
-            <div class="rounded-2xl bg-white p-6 shadow-sm sm:p-8">
+            <div class="profile-panel rounded-2xl bg-white p-6 shadow-sm sm:p-8">
                 <form method="POST" action="{{ route('profile.update') }}" class="max-w-xl space-y-5">
                     @csrf
                     @method('PATCH')
@@ -38,7 +40,7 @@
                 </form>
             </div>
 
-            <div class="rounded-2xl bg-white p-6 shadow-sm sm:p-8">
+            <div class="profile-panel rounded-2xl bg-white p-6 shadow-sm sm:p-8">
                 <form method="POST" action="{{ route('profile.password.update') }}" class="max-w-xl space-y-5">
                     @csrf
                     @method('PUT')
@@ -64,7 +66,7 @@
                 </form>
             </div>
 
-            <div class="rounded-2xl border border-rose-100 bg-white p-6 shadow-sm sm:p-8">
+            <div class="profile-panel rounded-2xl border border-rose-100 bg-white p-6 shadow-sm sm:p-8">
                 <form method="POST" action="{{ route('profile.destroy') }}" class="max-w-xl space-y-4" onsubmit="return confirm('Hapus akun Anda secara permanen?');">
                     @csrf
                     @method('DELETE')
